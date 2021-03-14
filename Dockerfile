@@ -4,6 +4,9 @@ ARG FLARESOLVERR_VER=1.2.3
 FROM node:alpine AS builder
 
 ARG FLARESOLVERR_VER
+ENV PUPPETEER_PRODUCT=chrome \
+    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
+    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
 ### install flaresolverr
 WORKDIR /output/flaresolverr
