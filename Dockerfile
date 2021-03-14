@@ -44,7 +44,7 @@ RUN apk add --no-cache npm chromium
 EXPOSE 8191/TCP
 
 HEALTHCHECK --start-period=10s --timeout=5s \
-    CMD wget -qO /dev/null "http://localhost:8191/v1"
+    CMD wget -qO /dev/null --header=Content-Type:application/json "http://localhost:8191"
 
 ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/entrypoint.sh"]
 CMD ["npm", "start"]
