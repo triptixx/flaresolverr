@@ -18,19 +18,21 @@ docker run -d \
     --name=srvflaresolverr \
     --restart=unless-stopped \
     --hostname=srvflaresolverr \
+    -e LOG_LEVEL=debug \
+    -e LOG_HTML=true \
     loxoo/flaresolverr
 ```
 ## Environment
 
-- `$SUID`         - User ID to run as. _default: `901`_
-- `$SGID`         - Group ID to run as. _default: `901`_
-- `$LOG_LEVEL`    - Logging severity levels. _default: `info`_
-- `$TZ`           - Timezone. _optional_
-
-## Volume
-
-- `/config`       - Server configuration file location.
+- `$SUID`                   - User ID to run as. _default: `922`_
+- `$SGID`                   - Group ID to run as. _default: `922`_
+- `$CAPTCHA_SOLVER`         - This is used to select which captcha solving method it used when a captcha is encountered. _default: `none`_
+- `$HARVESTER_ENDPOINT`     - Required if the captcha solver is Harvester. _optional_
+- `$HEADLESS`               - This is used to debug the browser by not running it in headless mode. _default: `true`_
+- `$LOG_LEVEL`              - Logging severity levels. _default: `info`_
+- `$LOG_HTML`               - If true all HTML that passes through the proxy will be logged to the console in debug level. _default: `false`_
+- `$TZ`                     - Timezone. _optional_
 
 ## Network
 
-- `53/udp`        - Dns port udp.
+- `8191/tcp`       - The port that FlareSolverr should listen for api connections on.
