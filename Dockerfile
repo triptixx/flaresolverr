@@ -5,8 +5,7 @@ FROM node:alpine AS builder
 
 ARG FLARESOLVERR_VER
 ENV PUPPETEER_PRODUCT=chrome \
-    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
-    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
 ### install flaresolverr
 WORKDIR /output/flaresolverr
@@ -30,7 +29,6 @@ FROM loxoo/alpine:${ALPINE_TAG}
 ARG FLARESOLVERR_VER
 ENV SUID=922 SGID=922 \
     PUPPETEER_PRODUCT=chrome \
-    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
     PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
 LABEL org.label-schema.name="flaresolverr" \
