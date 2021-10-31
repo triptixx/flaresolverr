@@ -4,9 +4,8 @@ ARG FLARESOLVERR_VER=2.0.1
 FROM node:alpine AS builder
 
 ARG FLARESOLVERR_VER
-ENV PUPPETEER_PRODUCT=chrome \
-    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
-    NODE_OPTIONS=--openssl-legacy-provider
+ENV PUPPETEER_PRODUCT=firefox \
+    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
 ### install flaresolverr
 WORKDIR /output/flaresolverr
@@ -17,8 +16,8 @@ RUN apk add --no-cache git; \
     cp -a /flaresolverr-src/src .; \
     npm run build; \
     npm prune --production; \
-    rm -rf src tsconfig.json; \
-    find ./node_modules/* -name 'node_modules' -type d -prune -print -exec rm -rf '{}' \;
+    rm -rf src tsconfig.json;
+    #find ./node_modules/* -name 'node_modules' -type d -prune -print -exec rm -rf '{}' \;
 
 COPY *.sh /output/usr/local/bin/
 RUN chmod +x /output/usr/local/bin/*.sh
@@ -29,8 +28,8 @@ FROM loxoo/alpine:${ALPINE_TAG}
 
 ARG FLARESOLVERR_VER
 ENV SUID=922 SGID=922 \
-    PUPPETEER_PRODUCT=chrome \
-    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+    PUPPETEER_PRODUCT=firefox \
+    PUPPETEER_EXECUTABLE_PATH=/usr/bin/firefox
 
 LABEL org.label-schema.name="flaresolverr" \
       org.label-schema.description="A docker image for proxy server to bypass Cloudflare protection" \
@@ -40,7 +39,7 @@ LABEL org.label-schema.name="flaresolverr" \
 COPY --from=builder /output/ /
 
 WORKDIR /flaresolverr
-RUN apk add --no-cache npm chromium
+RUN apk add --no-cache npm firefox-esr
 
 EXPOSE 8191/TCP
 
