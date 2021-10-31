@@ -5,7 +5,8 @@ FROM node:alpine AS builder
 
 ARG FLARESOLVERR_VER
 ENV PUPPETEER_PRODUCT=chrome \
-    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
+    NODE_OPTIONS=--openssl-legacy-provider
 
 ### install flaresolverr
 WORKDIR /output/flaresolverr
