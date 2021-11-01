@@ -19,6 +19,7 @@ jobs:
         with:
           verbose: true
           repo: flaresolverr-dev
+          delay: 20
           curl: :8191
       - name: publish
         uses: triptixx/action-docker-publish@master
