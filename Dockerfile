@@ -29,8 +29,7 @@ FROM loxoo/alpine:${ALPINE_TAG}
 ARG FLARESOLVERR_VER
 ENV SUID=922 SGID=922 \
     PUPPETEER_PRODUCT=firefox \
-    PUPPETEER_EXECUTABLE_PATH=/usr/bin/firefox \
-    HOME=/flaresolverr
+    PUPPETEER_EXECUTABLE_PATH="/usr/bin/firefox --profile /flaresolverr"
 
 LABEL org.label-schema.name="flaresolverr" \
       org.label-schema.description="A docker image for proxy server to bypass Cloudflare protection" \
