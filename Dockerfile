@@ -16,8 +16,7 @@ RUN apk add --no-cache git; \
     cp -a /flaresolverr-src/src .; \
     npm run build; \
     npm prune --production; \
-    rm -rf src tsconfig.json;
-    #find ./node_modules/* -name 'node_modules' -type d -prune -print -exec rm -rf '{}' \;
+    rm -rf src tsconfig.json
 
 COPY *.sh /output/usr/local/bin/
 RUN chmod +x /output/usr/local/bin/*.sh
@@ -41,7 +40,7 @@ COPY --from=builder /output/ /
 WORKDIR /flaresolverr
 RUN apk add --no-cache npm firefox-esr; \
     addgroup -g $SGID flaresolverr; \
-    adduser -h . -G flaresolverr -D -u $SUID flaresolverr
+    adduser -G flaresolverr -D -u $SUID flaresolverr
 
 EXPOSE 8191/TCP
 
