@@ -1,15 +1,14 @@
 [hub]: https://hub.docker.com/r/loxoo/flaresolverr
-[mbdg]: https://microbadger.com/images/loxoo/flaresolverr
-[git]: https://github.com/triptixx/flaresolverr
-[actions]: https://github.com/triptixx/flaresolverr/actions
+[git]: https://github.com/triptixx/flaresolverr/tree/master
+[actions]: https://github.com/triptixx/flaresolverr/actions/workflows/main.yml
 
 # [loxoo/flaresolverr][hub]
-[![Layers](https://images.microbadger.com/badges/image/loxoo/flaresolverr.svg)][mbdg]
-[![Latest Version](https://images.microbadger.com/badges/version/loxoo/flaresolverr.svg)][hub]
-[![Git Commit](https://images.microbadger.com/badges/commit/loxoo/flaresolverr.svg)][git]
+[![Git Commit](https://img.shields.io/github/last-commit/triptixx/flaresolverr/master)][git]
+[![Build Status](https://github.com/triptixx/flaresolverr/actions/workflows/main.yml/badge.svg?branch=master)][actions]
+[![Latest Version](https://img.shields.io/docker/v/loxoo/flaresolverr/latest)][hub]
+[![Size](https://img.shields.io/docker/image-size/loxoo/flaresolverr/latest)][hub]
 [![Docker Stars](https://img.shields.io/docker/stars/loxoo/flaresolverr.svg)][hub]
 [![Docker Pulls](https://img.shields.io/docker/pulls/loxoo/flaresolverr.svg)][hub]
-[![Build Status](https://github.com/triptixx/flaresolverr/workflows/docker%20build/badge.svg)][actions]
 
 ## Usage
 
