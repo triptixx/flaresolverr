@@ -16,7 +16,7 @@ if su-exec $SUID:$SGID [ ! -w "$CONFIG_DIR" ]; then
     2>&1 echo -e "${RED}#######################################################${RESET}"
     2>&1 echo
 
-    chown $SUID:$SGID "$CONFIG_DIR"
+    chown -R $SUID:$SGID "$CONFIG_DIR"
 fi
 
 ls -al /flaresolverr
