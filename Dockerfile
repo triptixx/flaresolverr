@@ -1,22 +1,18 @@
 ARG ALPINE_TAG=3.18
 ARG FLARESOLVERR_VER=3.3.6
 
-FROM node:alpine AS builder
+FROM loxoo/alpine:${ALPINE_TAG} AS builder
 
 ARG FLARESOLVERR_VER
-ENV PUPPETEER_PRODUCT=firefox \
-    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 
 ### install flaresolverr
 WORKDIR /output/flaresolverr
-RUN apk add --no-cache git; \
+RUN apk add --no-cache git py3-pip chromium-chromedriver; \
     git clone https://github.com/FlareSolverr/FlareSolverr.git --branch v${FLARESOLVERR_VER} /flaresolverr-src; \
-    cp -a /flaresolverr-src/package.json /flaresolverr-src/package-lock.json /flaresolverr-src/tsconfig.json .; \
-    npm install; \
-    cp -a /flaresolverr-src/src .; \
-    npm run build; \
-    npm prune --production; \
-    rm -rf src tsconfig.json
+    cp -a /usr/lib/chromium/chromedriver /flaresolverr-src/src/* /flaresolverr-src/package.json .; \
+    sed -i -r 's/\/.*\/(chromedriver)/\/flaresolverr\/\1/' utils.py; \
+    PY_VER=$(python -c "import sysconfig; print(sysconfig.get_path('purelib'))"); \
+    pip install -t /output/${PY_VER} -r /flaresolverr-src/requirements.txt
 
 COPY *.sh /output/usr/local/bin/
 RUN chmod +x /output/usr/local/bin/*.sh
@@ -26,9 +22,7 @@ RUN chmod +x /output/usr/local/bin/*.sh
 FROM loxoo/alpine:${ALPINE_TAG}
 
 ARG FLARESOLVERR_VER
-ENV SUID=922 SGID=922 \
-    PUPPETEER_PRODUCT=firefox \
-    PUPPETEER_EXECUTABLE_PATH=/usr/bin/firefox
+ENV SUID=922 SGID=922
 
 LABEL org.label-schema.name="flaresolverr" \
       org.label-schema.description="A docker image for proxy server to bypass Cloudflare protection" \
@@ -38,14 +32,14 @@ LABEL org.label-schema.name="flaresolverr" \
 COPY --from=builder /output/ /
 
 WORKDIR /flaresolverr
-RUN apk add --no-cache npm firefox-esr; \
+RUN apk add --no-cache python3 chromium xvfb; \
     addgroup -g $SGID flaresolverr; \
     adduser -G flaresolverr -D -u $SUID flaresolverr
 
-EXPOSE 8191/TCP
+EXPOSE 8191/TCP 8192/TCP
 
 HEALTHCHECK --start-period=10s --timeout=5s \
     CMD wget -qO /dev/null --header=Content-Type:application/json "http://localhost:8191"
 
 ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/entrypoint.sh"]
-CMD ["node", "/flaresolverr/dist/server.js"]
+CMD ["python", "-u", "/flaresolverr/flaresolverr.py"]
