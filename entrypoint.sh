@@ -19,6 +19,4 @@ if su-exec $SUID:$SGID [ ! -w "$CONFIG_DIR" ]; then
     chown -R $SUID:$SGID "$CONFIG_DIR"
 fi
 
-ls -al /flaresolverr
-
 exec su-exec $SUID:$SGID "$@"
