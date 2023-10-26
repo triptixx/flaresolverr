@@ -1,10 +1,10 @@
 [hub]: https://hub.docker.com/r/loxoo/flaresolverr
-[git]: https://github.com/triptixx/flaresolverr/tree/master
+[git]: https://github.com/triptixx/flaresolverr/tree/main
 [actions]: https://github.com/triptixx/flaresolverr/actions/workflows/main.yml
 
 # [loxoo/flaresolverr][hub]
-[![Git Commit](https://img.shields.io/github/last-commit/triptixx/flaresolverr/master)][git]
-[![Build Status](https://github.com/triptixx/flaresolverr/actions/workflows/main.yml/badge.svg?branch=master)][actions]
+[![Git Commit](https://img.shields.io/github/last-commit/triptixx/flaresolverr/main)][git]
+[![Build Status](https://github.com/triptixx/flaresolverr/actions/workflows/main.yml/badge.svg?branch=main)][actions]
 [![Latest Version](https://img.shields.io/docker/v/loxoo/flaresolverr/latest)][hub]
 [![Size](https://img.shields.io/docker/image-size/loxoo/flaresolverr/latest)][hub]
 [![Docker Stars](https://img.shields.io/docker/stars/loxoo/flaresolverr.svg)][hub]
