@@ -32,7 +32,7 @@ LABEL org.label-schema.name="flaresolverr" \
 COPY --from=builder /output/ /
 
 WORKDIR /flaresolverr
-RUN apk add --no-cache python3 chromium xvfb; \
+RUN apk add --no-cache python3 py3-setuptools chromium xvfb; \
     addgroup -g $SGID flaresolverr; \
     adduser -G flaresolverr -D -u $SUID flaresolverr
 
