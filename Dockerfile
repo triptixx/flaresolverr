@@ -12,7 +12,7 @@ RUN apk add --no-cache git py3-pip chromium-chromedriver; \
     cp -a /usr/lib/chromium/chromedriver /flaresolverr-src/src/* /flaresolverr-src/package.json .; \
     sed -i -r 's/\/.*\/(chromedriver)/\/flaresolverr\/\1/' utils.py; \
     PY_VER=$(python -c "import sysconfig; print(sysconfig.get_path('purelib'))"); \
-    pip install -t /output/${PY_VER} -r /flaresolverr-src/requirements.txt
+    pip install -t /output/${PY_VER} -r /flaresolverr-src/requirements.txt setuptools
 
 COPY *.sh /output/usr/local/bin/
 RUN chmod +x /output/usr/local/bin/*.sh
@@ -32,7 +32,7 @@ LABEL org.label-schema.name="flaresolverr" \
 COPY --from=builder /output/ /
 
 WORKDIR /flaresolverr
-RUN apk add --no-cache python3 py3-setuptools chromium xvfb; \
+RUN apk add --no-cache python3 chromium xvfb; \
     addgroup -g $SGID flaresolverr; \
     adduser -G flaresolverr -D -u $SUID flaresolverr
 
