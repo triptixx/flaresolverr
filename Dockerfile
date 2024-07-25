@@ -39,7 +39,7 @@ RUN apk add --no-cache python3 chromium xvfb; \
 EXPOSE 8191/TCP 8192/TCP
 
 HEALTHCHECK --start-period=10s --timeout=5s \
-    CMD wget -qO /dev/null --header=Content-Type:application/json "http://localhost:8191"
+    CMD wget -qO /dev/null --header=Content-Type:application/json "http://127.0.0.1:8191"
 
 ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/entrypoint.sh"]
 CMD ["python", "-u", "/flaresolverr/flaresolverr.py"]
